@@ -1,5 +1,5 @@
 # dev.finance$
-## Aplicação WEB de Gerenciamento Financeiro Pessoal</br>Maratona Discover Rockeseat
+## Gerenciamento Financeiro Pessoal</br>Maratona Discover Rockeseat
 ### Linguagens utilizadas:
 ##### HTML
 ##### CSS
