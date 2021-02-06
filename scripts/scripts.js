@@ -120,8 +120,8 @@ const DOM = {
 const Utils = {
     formatAmount(value){
         // Método de retirar todas as vírgulas e pontos, e colocar espaço vazio
-        value = Number(value.replace(/\,\./g, '')) * 100
-        return value
+        value = value.replace(/\,?\.?/g, '') * 100
+        return Math.round(value)
     },
 
     formatDate(value){
