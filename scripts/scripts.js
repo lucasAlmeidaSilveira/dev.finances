@@ -1,3 +1,16 @@
+const modeDarkLight = {
+    toggleOnOff(){
+            let html = document.querySelector('html')
+            const toggleControl = document.querySelector('#switch')
+
+            if (toggleControl.checked){
+                html.setAttribute('data-theme', 'dark')
+            } else{
+                html.setAttribute('data-theme', 'light') 
+            }
+    }
+}
+
 const modal = {
     open(){
         document.querySelector('.modal-overlay').classList.add('active');
@@ -90,7 +103,7 @@ const DOM = {
             <td class="${CSSclass}">${amount}</td>
             <td class="date">${transaction.date}</td>
             <td>
-                <img onclick='Transaction.remove(${index})' src="./assets/minus.svg" alt="Remover transação">
+                <img onclick='Transaction.remove(${index})' src="/assets/minus.svg" alt="Remover transação">
             </td>
         `
         return html
