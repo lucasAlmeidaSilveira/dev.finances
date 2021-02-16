@@ -11,7 +11,7 @@ const modeDarkLight = {
         let d = new Date()
         let hour = d.getHours()
 
-        hour >= 19 ? html.setAttribute('data-theme', 'dark') : html.setAttribute('data-theme', 'light')
+        hour >= 19 || hour <= 5 ? html.setAttribute('data-theme', 'dark') : html.setAttribute('data-theme', 'light')
     }
 
 
