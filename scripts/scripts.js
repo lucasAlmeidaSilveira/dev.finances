@@ -3,11 +3,7 @@ const modeDarkLight = {
             let html = document.querySelector('html')
             const toggleControl = document.querySelector('#switch')
 
-            if (toggleControl.checked){
-                html.setAttribute('data-theme', 'dark')
-            } else{
-                html.setAttribute('data-theme', 'light') 
-            }
+            toggleControl.checked ? html.setAttribute('data-theme', 'dark') : html.setAttribute('data-theme', 'light')
     }
 }
 
@@ -219,15 +215,15 @@ const Form = {
 
         // salvar
         Transaction.add(newTransaction)
+        
+        // ativa o som da moeda
+        DOM.soundCoin()
 
         // apagar os dados do formulário
         Form.clearFields()
 
         // modal feche
         modal.close()
-
-        // ativa o som da moeda
-        DOM.soundCoin()
 
         // atualizar a aplicação
         // Aqui seria necessário adicionar a function App.reload, mas não se faz necessário pois dentro da função Transaction.add já existe a função App.reload
