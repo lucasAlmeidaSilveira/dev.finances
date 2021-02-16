@@ -1,10 +1,20 @@
 const modeDarkLight = {
     toggleOnOff(){
-            let html = document.querySelector('html')
-            const toggleControl = document.querySelector('#switch')
+        let html = document.querySelector('html')
+        const toggleControl = document.querySelector('#switch')
 
-            toggleControl.checked ? html.setAttribute('data-theme', 'dark') : html.setAttribute('data-theme', 'light')
+        toggleControl.checked ? html.setAttribute('data-theme', 'dark') : html.setAttribute('data-theme', 'light')
+    },
+
+    toggleHour(){
+        let html = document.querySelector('html')
+        let d = new Date()
+        let hour = d.getHours()
+
+        hour >= 19 && hour <= 5 ? html.setAttribute('data-theme', 'dark') : html.setAttribute('data-theme', 'light')
     }
+
+
 }
 
 const modal = {
@@ -100,7 +110,7 @@ const DOM = {
 
         const amount = Utils.formatCurrency(transaction.amount)
 
-        const html = `
+        const tdTable = `
             <td class="description">${transaction.description}</td>
             <td class="${CSSclass}">${amount}</td>
             <td class="date">${transaction.date}</td>
@@ -108,7 +118,7 @@ const DOM = {
                 <img onclick='Transaction.remove(${index})' src="assets/minus.svg" alt="Remover transação">
             </td>
         `
-        return html
+        return tdTable
     },
 
     updateBalance(){
@@ -247,7 +257,6 @@ const App = {
         // Guardando as infos no localStorage
         Storage.set(Transaction.all)
 
-
     },
     reload(){
         DOM.clearTransactions()
@@ -257,3 +266,5 @@ const App = {
 }
 
 App.init()
+// Mudando modo de acordo com a hora
+modeDarkLight.toggleHour()
