@@ -37,8 +37,8 @@ const Transaction = {
     all: Storage.get(),
     add(transaction){
         Transaction.all.push(transaction)
-
         App.reload()
+
     },
 
     remove(index){
@@ -85,12 +85,18 @@ const Transaction = {
 const DOM = {
     transactionsContainer: document.querySelector('#data-table tbody'),
 
+    soundCoin(){
+        var coin = new Audio();
+        coin.src = "assets/sound/coin.mp3";
+        coin.play()
+    },
+
     addTransaction(transaction, index){
         const tr = document.createElement('tr')
         tr.innerHTML = DOM.innerHTMLTransaction(transaction, index)
         tr.dataset.index = index
-        
-        DOM.transactionsContainer.appendChild(tr)
+
+        DOM.transactionsContainer.appendChild(tr);
     },
 
     innerHTMLTransaction(transaction, index){
@@ -133,7 +139,7 @@ const DOM = {
 const Utils = {
     formatAmount(value){
         // Método de retirar todas as vírgulas e pontos, e colocar espaço vazio
-        value = value.replace(/\,?\.?/g, '') * 100
+        value = value.replace(/\,\./g, '') * 100
         return Math.round(value)
     },
 
@@ -220,6 +226,9 @@ const Form = {
         // modal feche
         modal.close()
 
+        // ativa o som da moeda
+        DOM.soundCoin()
+
         // atualizar a aplicação
         // Aqui seria necessário adicionar a function App.reload, mas não se faz necessário pois dentro da função Transaction.add já existe a função App.reload
 
@@ -234,12 +243,14 @@ const App = {
     init() {
         Transaction.all.forEach((transaction, index) => {
             DOM.addTransaction(transaction, index)
+
         })
         
         DOM.updateBalance()
         
         // Guardando as infos no localStorage
         Storage.set(Transaction.all)
+
 
     },
     reload(){
