@@ -4,6 +4,7 @@
     --green: #49aa26;
     --light-green: #3dd705;
     --red: #e92929;
+    font-size: 93.75%; /* 100% - 16px | 93.75% - 15px */
 }
 
 *{
@@ -12,12 +13,32 @@
     padding: 0;
 }
 
-html{
-    font-size: 93.75%; /* 100% - 16px | 93.75% - 15px */
+html[data-theme="light"]{
+    --bg: #f0f2f5;
+    --bg-header: #2d4a22;
+    --data-table: #969cb3;
+    --th-table: #fff;
+    --td-table: #363f5f;
+    --income: #12A454;
+    --text-modal: #000;
+    --footer: #363f5f;
+
+}
+
+html[data-theme="dark"]{
+    --bg: #424242;
+    --bg-header: #5c5c5c;
+    --data-table: #fff;
+    --th-table: #4F4F4F;
+    --td-table: #363f5f;
+    --income: #49aa26;
+    --text-modal: #fff;
+    --footer: #fff;
+
 }
 
 body{
-    background: #f0f2f5;
+    background: var(--bg);
     font-family: 'Poppins', sans-serif;
 }
 
@@ -35,7 +56,6 @@ body{
 
 .container{
     width: min(90vw, 800px);
-    
     margin: auto;
 }
 
@@ -48,6 +68,48 @@ h2{
 }
 
 /* ====================== Links & Buttons ====================== */
+
+input[type=checkbox]{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+label{
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 52px;
+    height: 27px;
+    background: grey;
+    float: right;
+    border-radius: 100px;
+    position: relative;
+}
+
+label::after{
+    content: " ";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 90px;
+    transition: .3s;
+}
+
+input:checked + label{
+    background: var(--green);
+}
+
+input:checked + label::after{
+    left: calc(100% - 5px);
+    transform: translateX(-100%)
+}
+
+label:active:after{
+    width: 45px;
+}
 
 a{
     color: var(--green);
@@ -81,6 +143,17 @@ button:hover{
     margin-bottom: .8rem;
 }
 
+.button.clear{
+    float: right;
+    opacity: .7;
+    color: var(--red);
+}
+
+.button.clear:hover{
+    float: right;
+    opacity: 1;
+}
+
 .button.cancel{
     color: var(--red);
     border: 2px solid var(--red);
@@ -100,14 +173,20 @@ button:hover{
 
 /* ====================== Header ====================== */
 header{
-    background: #2d4a22;
+    background: var(--bg-header);
     padding: 2rem 0 10rem;
     text-align: center;
+    display: flex;
+    align-items: center;
 }
 
 #logo{
     font-weight: 100;
     color: #fff;
+}
+
+#toggle{
+    float: right;
 }
 
 /* ====================== Balance ====================== */
@@ -160,7 +239,7 @@ header{
 #data-table{
     width: 100%;
     border-spacing: 0 0.5rem;
-    color: #969cb3;
+    color: var(--data-table);
 }
 
 table thead tr th:first-child, 
@@ -176,7 +255,7 @@ table tbody tr td:last-child {
 }
 
 table thead th{
-    background: #fff;
+    background: var(--th-table);
     font-weight: normal;
     padding:1rem 2rem;
     text-align:left;
@@ -199,11 +278,15 @@ td.description{
 }
 
 td.income{
-    color: #12A454;
+    color: var(--income);
 }
 
 td.expense{
     color: var(--red);
+}
+
+td.date{
+    color: var(--td-table)
 }
 
 /* ====================== Modal ====================== */
@@ -229,10 +312,14 @@ td.expense{
 }
 
 .modal{
-    background-color: #f0f2f5;
+    background-color: var(--bg);
     padding: 2.4rem;
     position: relative;
     z-index: 2;
+}
+
+.modal h2, .modal small{
+    color: var(--text-modal);
 }
 
 /* ====================== Form ====================== */
@@ -278,7 +365,7 @@ td.expense{
 footer{
     text-align: center;
     padding: 4rem 0 2rem;
-    color: var(--dark-blue);
+    color: var(--footer);
     opacity: .6;
 }
 
