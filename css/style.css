@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* ====================== Global ====================== */
 :root{
     --dark-blue: #363f5f;
@@ -382,3 +383,389 @@ footer{
         gap: 2rem;
     }
 }
+=======
+/* ====================== Global ====================== */
+:root{
+    --dark-blue: #363f5f;
+    --green: #49aa26;
+    --light-green: #3dd705;
+    --red: #e92929;
+    font-size: 93.75%; /* 100% - 16px | 93.75% - 15px */
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html[data-theme="light"]{
+    --bg: #f0f2f5;
+    --bg-header: #2d4a22;
+    --data-table: #969cb3;
+    --th-table: #fff;
+    --td-table: #363f5f;
+    --income: #12A454;
+    --text-modal: #000;
+    --footer: #363f5f;
+
+}
+
+html[data-theme="dark"]{
+    --bg: #424242;
+    --bg-header: #5c5c5c;
+    --data-table: #fff;
+    --th-table: #4F4F4F;
+    --td-table: #363f5f;
+    --income: #49aa26;
+    --text-modal: #fff;
+    --footer: #fff;
+
+}
+
+body{
+    background: var(--bg);
+    font-family: 'Poppins', sans-serif;
+}
+
+.sr-only{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding:0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.container{
+    width: min(90vw, 800px);
+    margin: auto;
+}
+
+/* ====================== Titles ====================== */
+h2{
+    margin-top: 3.2rem;
+    margin-bottom: 0.8rem;
+    color: var(--dark-blue);
+    font-weight: 400;
+}
+
+/* ====================== Links & Buttons ====================== */
+
+input[type=checkbox]{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+label{
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 52px;
+    height: 27px;
+    background: grey;
+    float: right;
+    border-radius: 100px;
+    position: relative;
+}
+
+label::after{
+    content: " ";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 90px;
+    transition: .3s;
+}
+
+input:checked + label{
+    background: var(--green);
+}
+
+input:checked + label::after{
+    left: calc(100% - 5px);
+    transform: translateX(-100%)
+}
+
+label:active:after{
+    width: 45px;
+}
+
+a{
+    color: var(--green);
+    text-decoration: none;
+}
+
+a:hover{
+    color: var(--light-green);
+}
+
+button{
+    width: 100%;
+    height: 50px;
+
+    border: none;
+
+    color: #fff;
+    background: var(--green);
+
+    padding: 0;
+    border-radius: .2rem;
+    cursor: pointer;
+}
+
+button:hover{
+    background: var(--light-green);
+}
+
+.button.new{
+    display: inline-block; /* Tirando o display inline para poder pegar o margin-bottom */
+    margin-bottom: .8rem;
+}
+
+.button.clear{
+    float: right;
+    opacity: .7;
+    color: var(--red);
+}
+
+.button.clear:hover{
+    float: right;
+    opacity: 1;
+}
+
+.button.cancel{
+    color: var(--red);
+    border: 2px solid var(--red);
+    border-radius: .2rem;
+
+    height:50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: .6;
+}
+
+.button.cancel:hover{
+    opacity: 1;
+}
+
+/* ====================== Header ====================== */
+header{
+    background: var(--bg-header);
+    padding: 2rem 0 10rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+#logo{
+    font-weight: 100;
+    color: #fff;
+}
+
+#toggle{
+    float: right;
+}
+
+/* ====================== Balance ====================== */
+#balance{
+    margin-top: -6rem;
+}
+
+#balance h2{
+    color: #fff;
+    margin-top: 0;
+}
+
+/* ====================== Cards ====================== */
+.card{
+    background-color: #fff;
+    padding: 1.5rem 2rem;
+    border-radius: .25rem;
+    margin-bottom:2rem;
+    color: var(--dark-blue);
+}
+
+.card h3{
+    font-weight: normal;
+    font-size: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.card p{
+    font-size: 2rem;
+    line-height: 3rem;
+    
+    margin-top:1rem;
+}
+
+.card.total{
+    background: var(--green);
+    color: #fff;
+}
+
+/* ====================== Table ====================== */
+#transaction{
+/*     display: block;
+    width: 100%; */
+    overflow-x: auto; /* cria uma barra de rolagem na table se necessário quando o tamanho da media for muito pequeno e não comporte o table dentro */
+}
+#data-table{
+    width: 100%;
+    border-spacing: 0 0.5rem;
+    color: var(--data-table);
+}
+
+table thead tr th:first-child, 
+table tbody tr td:first-child {
+
+    border-radius: .25rem 0 0 .25rem;
+}
+
+table thead tr th:last-child, 
+table tbody tr td:last-child {
+
+    border-radius: 0 .25rem .25rem 0;
+}
+
+table thead th{
+    background: var(--th-table);
+    font-weight: normal;
+    padding:1rem 2rem;
+    text-align:left;
+}
+table tbody tr{
+    opacity: .7;
+}
+table tbody tr:hover{
+    opacity: 1;
+}
+
+table tbody td{
+    background: #fff;
+
+    padding: 1rem 2rem;
+}
+
+td.description{
+    color: var(--dark-blue);
+}
+
+td.income{
+    color: var(--income);
+}
+
+td.expense{
+    color: var(--red);
+}
+
+td.date{
+    color: var(--td-table)
+}
+
+/* ====================== Modal ====================== */
+
+.modal-overlay{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .7);
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+}
+
+.modal-overlay.active{
+    opacity: 1;
+    visibility: visible;
+    transition: all .3s;
+}
+
+.modal{
+    background-color: var(--bg);
+    padding: 2.4rem;
+    position: relative;
+    z-index: 2;
+}
+
+.modal h2, .modal small{
+    color: var(--text-modal);
+}
+
+/* ====================== Form ====================== */
+
+#form{
+    max-width: 500px;
+}
+
+#form h2{
+    margin-top:0;
+}
+
+#form form input{
+    border: none;
+    border-radius: 0.2rem;
+
+    padding:0.8rem;
+    width: 100%;
+}
+
+.input-group{
+    margin-top:.8rem;
+}
+
+.input-group small{
+    opacity: .4;
+}
+
+.input-group.actions{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-group.actions .button,
+.input-group.actions button{
+    width: 48%;
+    outline: none;
+}
+
+/* ====================== Footer ====================== */
+
+footer{
+    text-align: center;
+    padding: 4rem 0 2rem;
+    color: var(--footer);
+    opacity: .6;
+}
+
+/* ====================== Responsive ====================== */
+
+@media (min-width:800px){
+    html{
+        font-size: 87.5%;
+    }
+
+    #balance{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Repete 3x o '1fr' */
+        gap: 2rem;
+    }
+}
+>>>>>>> 569a408748f0314a1aa994bfc6a97b2aebcafe44
