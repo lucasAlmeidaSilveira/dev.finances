@@ -1,3 +1,26 @@
+const modeDarkLight = {
+    toggleOnOff(){
+        let html = document.querySelector('html')
+        const toggleControl = document.querySelector('#switch')
+
+        toggleControl.checked ? html.setAttribute('data-theme', 'dark') : html.setAttribute('data-theme', 'light')
+    },
+
+    toggleHour(){
+        let html = document.querySelector('html')
+        let d = new Date()
+        let hour = d.getHours()
+
+        if (hour >= 19 || hour <=5){
+            html.setAttribute('data-theme', 'dark')
+            document.querySelector('#switch').checked = true
+
+        } else{
+            html.setAttribute('data-theme', 'light')
+        }
+    }
+}
+
 const modal = {
     open(){
         document.querySelector('.modal-overlay').classList.add('active');
@@ -24,8 +47,8 @@ const Transaction = {
     all: Storage.get(),
     add(transaction){
         Transaction.all.push(transaction)
-
         App.reload()
+
     },
 
     remove(index){
@@ -72,12 +95,18 @@ const Transaction = {
 const DOM = {
     transactionsContainer: document.querySelector('#data-table tbody'),
 
+    soundCoin(){
+        var coin = new Audio();
+        coin.src = "assets/sound/coin.mp3";
+        coin.play()
+    },
+
     addTransaction(transaction, index){
         const tr = document.createElement('tr')
         tr.innerHTML = DOM.innerHTMLTransaction(transaction, index)
         tr.dataset.index = index
-        
-        DOM.transactionsContainer.appendChild(tr)
+
+        DOM.transactionsContainer.appendChild(tr);
     },
 
     innerHTMLTransaction(transaction, index){
@@ -85,15 +114,15 @@ const DOM = {
 
         const amount = Utils.formatCurrency(transaction.amount)
 
-        const html = `
+        const tdTable = `
             <td class="description">${transaction.description}</td>
             <td class="${CSSclass}">${amount}</td>
             <td class="date">${transaction.date}</td>
             <td>
-                <img onclick='Transaction.remove(${index})' src="/assets/minus.svg" alt="Remover transação">
+                <img onclick='Transaction.remove(${index})' src="assets/minus.svg" alt="Remover transação">
             </td>
         `
-        return html
+        return tdTable
     },
 
     updateBalance(){
@@ -120,7 +149,7 @@ const DOM = {
 const Utils = {
     formatAmount(value){
         // Método de retirar todas as vírgulas e pontos, e colocar espaço vazio
-        value = value.replace(/\,?\.?/g, '') * 100
+        value = value.replace(/\,\./g, '') * 100
         return Math.round(value)
     },
 
@@ -200,6 +229,9 @@ const Form = {
 
         // salvar
         Transaction.add(newTransaction)
+        
+        // ativa o som da moeda
+        DOM.soundCoin()
 
         // apagar os dados do formulário
         Form.clearFields()
@@ -221,6 +253,7 @@ const App = {
     init() {
         Transaction.all.forEach((transaction, index) => {
             DOM.addTransaction(transaction, index)
+
         })
         
         DOM.updateBalance()
@@ -237,3 +270,5 @@ const App = {
 }
 
 App.init()
+// Mudando modo de acordo com a hora
+modeDarkLight.toggleHour()
